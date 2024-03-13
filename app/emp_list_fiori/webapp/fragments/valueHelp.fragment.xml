@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
+	xmlns:plugins="sap.ui.table.plugins" xmlns:f="sap.ui.layout.form"
+	core:require="{ handler: 'com/sbp/emplistfiori/controller/ListReportExtController'}">
+	<!--register the relevant controller to fragment-->
+	<Dialog id="valueHelpDialog" title="Adapt Filters" contentWidth="auto" contentHeight="50vh">
+		<customHeader>
+			<Bar >
+				<contentLeft>
+					<Title  text="{i18n>valueHelpTitle}" />
+				</contentLeft>
+				<contentRight>
+				<Button text="" tooltip="Close"  icon="sap-icon://decline" type="Transparent" press="handler.closeEmpInfoFragment" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+         	<List selectionChange="handler.selectRecord"
+		id="empInfoList"
+		items="{/empInfoData}"
+		mode="SingleSelectLeft"
+		includeItemInSelection="true">
+		<StandardListItem 
+			title="{empID}" description="{empName}"/>
+	</List>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,53 @@
+{
+  "name": "EmployeeList",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^6",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.16",
+    "@sap/hana-client": "^2.15.17",
+    "express": "^4",
+    "hdb": "^0.19.0"
+  },
+  "scripts": {
+    "start": "cds run",
+    "undeploy": "cf undeploy EmployeeList --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-emp_list_annotations": "cds watch --open emp_list_annotations/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-emp_list_fiori": "cds watch --open emp_list_fiori/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "build": {
+      "tasks": [
+        {
+          "for": "hana",
+          "dest": "../db"
+        },
+        {
+          "for": "node-cf"
+        }
+      ]
+    },
+    "requires": {
+      "db": {
+        "kind": "hana-cloud"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "4.5.1",
+    "@sap/ux-specification": "^1.102.14",
+    "rimraf": "^3.0.2"
+  },
+  "sapux": [
+    "app/emp_list_annotations",
+    "app/Analytics/emp_list_fiori"
+  ]
+}

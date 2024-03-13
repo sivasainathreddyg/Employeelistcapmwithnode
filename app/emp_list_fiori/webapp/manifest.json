@@ -1,0 +1,264 @@
+{
+    "_version": "1.48.0",
+    "sap.app": {
+        "id": "com.sbp.emplistfiori",
+        "type": "application",
+        "i18n": "i18n/i18n_en.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.8.3",
+            "toolsId": "f3af8d8c-ffff-47e5-a2f3-6a2edb8d533e"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/catalog/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "service2": {
+                "uri": "v2/catalog/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.109.3",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.sbp.emplistfiori.i18n.i18n_en"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "eModel": {
+                "dataSource": "service2",
+                "preload": false,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n_en.properties"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "Interactions_HeaderList",
+                    "target": "Interactions_HeaderList"
+                },
+                {
+                    "pattern": "Interactions_Header({key}):?query:",
+                    "name": "Interactions_HeaderObjectPage",
+                    "target": "Interactions_HeaderObjectPage"
+                }
+            ],
+            "targets": {
+                "Interactions_HeaderList": {
+                    "type": "Component",
+                    "id": "Interactions_HeaderList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Interactions_Header",
+                            "navigation": {
+                                "Interactions_Header": {
+                                    "detail": {
+                                        "route": "Interactions_HeaderObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled",
+                            "hideFilterBar": false,
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "actions": {
+                                        "BtnNew": {
+                                            "requiresSelection": false,
+                                            "text": "{i18n>new}",
+                                            "press": "com.sbp.emplistfiori.controller.ListReportExtController.openFragment",
+                                            "visible": true,
+                                            "enabled": true
+                                        },
+                                        "BatchCreate": {
+                                            "press": "com.sbp.emplistfiori.controller.ListReportExtController.batchCreate",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
+                                            "text": "{i18n>batchCreate}",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "BtnNew"
+                                            }
+                                        }
+                                    },
+                                    "columns": {
+                                        "TableEdit": {
+                                            "position": {
+                                                "anchor": "DataField::priority_code",
+                                                "placement": "After"
+                                            },
+                                            "header": "{i18n>edit}",
+                                            "template": "com.sbp.emplistfiori.fragments.editColumn",
+                                            "horizontalAlign": "Center"
+                                        },
+                                        "DataField::Image": {
+                                            "availability": "Default"
+                                        }
+                                    },
+                                    "tableSettings": {
+                                        "selectAll": true,
+                                        "type": "ResponsiveTable"
+                                    }
+                                }
+                            },
+                            "variantManagement": "None"
+                        }
+                    }
+                },
+                "Interactions_HeaderObjectPage": {
+                    "type": "Component",
+                    "id": "Interactions_HeaderObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "Interactions_Header",
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "BtnBack": {
+                                            "press": "com.sbp.emplistfiori.controller.ListReportExtController.Back",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "{i18n>back}",
+                                            "position": {
+                                                "anchor": "BtnBack",
+                                                "placement": "Before"
+                                            }
+                                        }
+                                    }
+                                },
+                                "body": {
+                                    "sections": {}
+                                }
+                            },
+                            "sectionLayout": "Tabs",
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.FieldGroup#GeneratedGroup1": {
+                                    "actions": {
+                                        "BtnAdd": {
+                                            "press": "com.sbp.emplistfiori.ext.controller.ListObjectPage.AddRow",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Add"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ListReport.ListReportController": {
+                        "controllerName": "com.sbp.emplistfiori.ext.controller.ListReport"
+                    },
+                    "sap.fe.templates.ListReport.ListReportController#com.sbp.emplistfiori::Interactions_HeaderList": {
+                        "controllerName": "com.sbp.emplistfiori.ext.controller.ListReport"
+                    },
+                    "sap.fe.templates.ObjectPage.ObjectPageController": {
+                        "controllerName": "com.sbp.emplistfiori.ext.controller.ListReport"
+                    },
+                    "sap.fe.templates.ObjectPage.ObjectPageController#com.sbp.emplistfiori::Interactions_HeaderObjectPage": {
+                        "controllerName": "com.sbp.emplistfiori.ext.controller.ListReport"
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

@@ -1,0 +1,81 @@
+<mvc:View controllerName="com.sbp.employeelist.controller.employeeList" xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core">
+    <Page id="page" title="">
+        <customHeader>
+            <Bar id="customBar1">
+                <contentMiddle>
+                    <Text id="pageTitle" text="{i18n>title}" class="pageTitle"></Text>
+                </contentMiddle>
+            </Bar>
+        </customHeader>
+        <content>
+                <!-- <mvc:XMLView id="progressView" viewName="com.sbp.employeelist.view.progressBar"/> -->
+            <ScrollContainer id="_IDGenScrollContainer1" height="100%" vertical="true" horizontal="false">
+                <Table id="empTable" items="{/empData}" mode="MultiSelect" sticky="ColumnHeaders"
+                    alternateRowColors="true" selectionChange="rowSelection" fixedLayout="false" class="empTableCls"
+                    contextualWidth="Auto" growing="true">
+                    <headerToolbar>
+                        <OverflowToolbar id="_IDGenOverflowToolbar1">
+                            <Title id="_IDGenTitle1" text="{i18n>tableHeader} ({/empData/length})" level="H2" />
+                            <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                            <HBox id="hBox1">
+                                <SearchField id="txtSearch" class="sapUiTinyMarginBeginEnd" liveChange="search"
+                                    placeholder="{i18n>searchPlaceHolder}" />
+                                <Button text="{i18n>create}" type="Transparent" tooltip="Ctrl+Alt+C"
+                                    class="sapUiTinyMarginBeginEnd" id="btnCreate" press="createEmployees" />
+                            </HBox>
+                             <MultiInput  id="userMulti" type="Text"  showSuggestion="false" showValueHelp="true" valueHelpOnly="true"
+      valueHelpRequest="onF4Click"  width="300px"/>
+                        <Button id="testbtn" class="" text="" icon="sap-icon://synchronize" press="synchronizeUsers"></Button>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="_IDGenColumn1" vAlign="Middle" width="5em" hAlign="Center">
+                            <Text id="_IDGenText1" text="{i18n>column1}" />
+                        </Column>
+                        <Column id="_IDGenColumn2" vAlign="Middle" width="auto" minScreenWidth="Tablet"
+                            demandPopin="true">
+                            <Text id="_IDGenText2" text="{i18n>column2}" />
+                        </Column>
+                        <Column id="_IDGenColumn3" vAlign="Middle" width="auto" minScreenWidth="Tablet"
+                            demandPopin="true">
+                            <Text id="_IDGenText3" text="{i18n>column3}" />
+                        </Column>
+                        <Column id="_IDGenColumn4" vAlign="Middle" width="auto" minScreenWidth="Tablet"
+                            demandPopin="true">
+                            <Text id="_IDGenText4" text="{i18n>column4}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="_IDGenColumnListItem1" type="Inactive">
+                            <cells>
+                                <Label id="_IDGenLabel1" text="{empID}" />
+                                <Label id="_IDGenLabel2" text="{empName}" />
+                                <Label id="_IDGenLabel3" text="{phone}" />
+                                <HBox id="btnBox" alignItems="Center">
+                                    <Button icon="sap-icon://edit" id="editbtn" class="btnHover" type="Emphasized"
+                                        tooltip="{i18n>edit}" press="editClick"></Button>
+                                    <Button id="deletebtn" icon="sap-icon://decline"
+                                        class="sapUiTinyMarginBegin btnHover" type="Reject" tooltip="{i18n>remove}"
+                                        press="removeEmployee" visible="{newEmp}"></Button>
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </content>
+        <footer>
+            <OverflowToolbar id="otbFooter" class="toolbarBg">
+                <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                <Button id="btnBatchSave" type="Accept" text="{i18n>save}" press="batchSave" enabled="false">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <OverflowToolbarButton id="_IDGenOverflowToolbarButton1" icon="sap-icon://delete"
+                    press="deleteEmployees" class="sapUiTinyMarginBegin btnHover" type="Reject" tooltip="{i18n>delete}" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
+	xmlns:plugins="sap.ui.table.plugins" xmlns:f="sap.ui.layout.form">
+	<Dialog id="userDialog"  contentWidth="auto" contentHeight="auto">
+		<customHeader>
+			<Bar id="_IDGenBar1">
+				<contentLeft>
+					<Title id="fragmentTitle" text="{i18n>userFragmentTitle}" />
+				</contentLeft>
+			</Bar>
+		</customHeader>
+		<content>
+        	<List
+		id="userList"
+		items="{/userData}"
+		mode="MultiSelect"
+		includeItemInSelection="true">
+		<StandardListItem id="_IDGenStandardListItem1"
+			title="{userName}" />
+	</List>
+		</content>
+		<beginButton>
+			<Button id="empTogglebtn" text="Select" type="Emphasized" press="selectUsers" />
+		</beginButton>
+		<endButton>
+			<Button id="_IDGenButton3" text="Cancel" press=".closeUser" type="Transparent" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

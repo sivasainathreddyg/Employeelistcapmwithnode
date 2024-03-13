@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer" >
+                <EntitySet Name="Interactions_Header" EntityType="CatalogService.Interactions_Header" />
+                <FunctionImport Name="updateEmployee" Function="CatalogService.updateEmployee"/>
+                <FunctionImport Name="saveEmployees" Function="CatalogService.saveEmployees"/>
+                <FunctionImport Name="deleteEmployees" Function="CatalogService.deleteEmployees"/>
+            </EntityContainer>
+            <EntityType Name="Interactions_Header">
+                <Key>
+                    <PropertyRef Name="empID"/>
+                </Key>
+                <Property Name="empID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="empName" Type="Edm.String" MaxLength="1024"/>
+                <Property Name="phone" Type="Edm.String" MaxLength="1024"/>
+            </EntityType>
+            <ComplexType Name="employees">
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="EMPNAME" Type="Edm.String"/>
+                <Property Name="PHONE" Type="Edm.String"/>
+            </ComplexType>
+            <Function Name="updateEmployee" IsBound="false" >
+                <Parameter Name="eId" Type="Edm.Int32"/>
+                <Parameter Name="eName" Type="Edm.String"/>
+                <Parameter Name="ePhone" Type="Edm.String" MaxLength="10"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Function Name="saveEmployees" IsBound="false" >
+                <Parameter Name="employees" Type="Edm.String"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Function Name="deleteEmployees" IsBound="false" >
+                <Parameter Name="employeeIds" Type="Edm.String"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

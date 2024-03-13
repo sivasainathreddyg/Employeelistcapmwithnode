@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"
+core:require="{ handler: 'com/sbp/emplistfiori/controller/ListReportExtController'}">
+		<Image id="empImage" src="https://fj-employera-blog.s3.amazonaws.com/employer-blog/wp-content/uploads/2015/11/5-Ways-to-Analyze-Employee-Performance-1024x508.jpg" width="20px" />
+</core:FragmentDefinition>

@@ -1,0 +1,133 @@
+{
+  "_version": "1.48.0",
+  "sap.app": {
+    "id": "com.sbp.employeelist",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.8.3",
+      "toolsId": "5b17baaa-af19-4428-aa6c-8cc7e1930686"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "v2/catalog/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.109.3",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.sbp.employeelist.i18n.i18n_en_US"
+        }
+      },
+      "eModel": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+            "synchronizationMode": "None",
+            "operationMode": "Server",
+            "autoExpandSelect": true,
+            "earlyRequests": true
+        }
+    }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.sbp.employeelist.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteemployeeList",
+          "pattern": ":?query:",
+          "target": [
+            "TargetemployeeList"
+          ]
+        },
+        {
+          "name": "userapi",
+          "path": "/v3/users",
+          "target": {
+              "type": "service"
+          }
+      }
+      ],
+      "targets": {
+        "TargetemployeeList": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "employeeList",
+          "viewName": "employeeList"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.sbp.employeelist.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

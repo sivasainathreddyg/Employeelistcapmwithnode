@@ -1,0 +1,71 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
+	xmlns:plugins="sap.ui.table.plugins" xmlns:f="sap.ui.layout.form"
+	core:require="{ handler: 'com/sbp/emplistfiori/controller/ListReportExtController'}">
+	<!--register the relevant controller to fragment-->
+	<Dialog id="openDialog" title="Adapt Filters" contentWidth="auto" contentHeight="auto">
+		<customHeader>
+			<Bar id="_IDGenBar1">
+				<contentLeft>
+					<Title id="fragmentTitle" text="{i18n>fragmentAddTitle}" />
+				</contentLeft>
+				<contentRight>
+					<Button id="resetBtn" text="{i18n>reset}" class="sapUiTinyMargin" width="auto" type="Transparent"
+						press="handler.reset" />
+				</contentRight>
+
+			</Bar>
+		</customHeader>
+		<content>
+			<FlexBox width="100%" id="box0" alignItems="Center" justifyContent="Center">
+				<items>
+					<f:Form id="employeeForm" editable="true" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+						<f:layout>
+							<f:ResponsiveGridLayout id="_IDGenResponsiveGridLayout1" labelSpanXL="6" labelSpanL="6"
+								labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+								emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+								singleContainerFullSize="false" />
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer id="_IDGenFormContainer1">
+								<f:formElements>
+									<f:FormElement id="_IDGenFormElement1" label="{i18n>eID}">
+										<f:fields>
+											<Input  id="txtEmpID" type="Number" value="" submit="modifyEmployee" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement id="_IDGenFormElement2" label="{i18n>eName}">
+										<f:fields>
+											<Input id="txtEmpName" type="Text" value="" submit="modifyEmployee" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement id="_IDGenFormElement3" label="{i18n>ePhone}">
+										<f:fields>
+											<Input id="txtPhone" type="Tel" value="" maxLength="10"
+												liveChange="numberChange" submit="modifyEmployee" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement id="_IDGenFormElement4" label="{i18n>priority}">
+										<f:fields>
+											<RadioButtonGroup id="priorityGrp" columns="3">
+												<RadioButton id="radio_High" text="High" selected="true" />
+												<RadioButton id="radio_Medium" text="Medium"
+													class="sapUiTinyMarginBegin" />
+												<RadioButton id="radio_Low" text="Low" class="sapUiTinyMarginBegin" />
+											</RadioButtonGroup>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</items>
+			</FlexBox>
+		</content>
+		<beginButton>
+			<Button id="empTogglebtn" text="Save" type="Emphasized" press="handler.empSaveUpdate" />
+		</beginButton>
+		<endButton>
+			<Button id="empClosebtn" text="Cancel" type="Transparent" press="handler.closeFragment" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

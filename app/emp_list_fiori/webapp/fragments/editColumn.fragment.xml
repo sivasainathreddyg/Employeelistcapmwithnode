@@ -1,0 +1,14 @@
+<!--Custom fragment used as table column-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+ <!-- <table:Column >
+              <Label text="Rating" />
+              <table:customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "Rating", "leadingProperty":"Price", "columnIndex" : "100"}' />
+              </table:customData>
+       </table:Column> -->
+       <!-- <Text text="testing"></Text> -->
+                	<Button id="btnEdit" core:require="{ handler: 'com/sbp/emplistfiori/controller/ListReportExtController'}"
+	icon="sap-icon://edit" type="Emphasized" tooltip="Edit"
+	 text="" press="handler.edit" />
+</core:FragmentDefinition>

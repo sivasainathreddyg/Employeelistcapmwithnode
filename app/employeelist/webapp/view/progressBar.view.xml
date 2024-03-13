@@ -1,0 +1,42 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml">
+    <App>
+        <Page id="progressView" title="">
+            <content>
+                <!-- <html:style>
+                    .progress-bar {
+                    height: 4px;
+                    background-color: rgba(5, 114, 206, 0.2);
+                    width: 100%;
+                    overflow: hidden;
+                    }
+
+                    .progress-bar-value {
+                    width: 100% !important;
+                    height: 100% !important;
+                    background-color: rgb(5, 114, 206) !important;
+                    animation: indeterminateAnimation 1s infinite linear !important;
+                    transform-origin: 0% 50% !important;
+                    }
+
+                    @keyframes indeterminateAnimation {
+                    0% {
+                    transform: translateX(0) scaleX(0) !important;
+                    }
+                    40% {
+                    transform: translateX(0) scaleX(0.4) !important;
+                    }
+                    100% {
+                    transform: translateX(100%) scaleX(0.5) !important;
+                    }
+                    }
+                </html:style> -->
+                <Text text="tessttttt"></Text>
+                <html:div class="demo-container">
+                    <html:div class="progress">
+                         <html:div class="progress-value"></html:div>
+                    </html:div>
+                </html:div>
+            </content>
+        </Page>
+    </App>
+</mvc:View>

@@ -1,0 +1,5 @@
+<core:FragmentDefinition id="_IDGenFragmentDefinition1" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml">
+<html:div class="progress">
+  <html:div class="progress-value"></html:div>
+</html:div>
+</core:FragmentDefinition>

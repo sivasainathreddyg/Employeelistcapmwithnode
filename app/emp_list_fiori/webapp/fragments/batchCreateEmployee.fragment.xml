@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
+	xmlns:plugins="sap.ui.table.plugins" xmlns:f="sap.ui.layout.form"
+	core:require="{ handler: 'com/sbp/emplistfiori/controller/ListReportExtController'}">
+	<!--register the relevant controller to fragment-->
+	<Dialog id="empDialog" title="Adapt Filters" contentWidth="50vw" contentHeight="auto">
+		<customHeader>
+			<Bar id="_IDGenBar1">
+				<contentLeft>
+					<Title id="fragmentTitle" text="{i18n>fragmentAddTitle}" />
+				</contentLeft>
+				<contentRight>
+					<HBox id="hButtons">
+						<Button id="btnAdd" text="Add" press="handler.AddRow" type="Accept" tooltip="Add"></Button>
+						<Button id="resetBtn" text="Save" class="sapUiSmallMarginBegin" width="auto" type="Transparent"
+							press="handler.batchSave" />
+					</HBox>
+
+				</contentRight>
+
+			</Bar>
+		</customHeader>
+		<content>
+			<Table id="employeeTable" items="" mode="None" sticky="ColumnHeaders" fixedLayout="false"
+				contextualWidth="Auto" growing="true">
+				<columns>
+					<Column id="_IDGenColumn1" vAlign="Middle" width="auto">
+						<Text id="_IDcolHeader1" text="Employee ID*" />
+					</Column>
+					<Column vAlign="Middle" id="_IDGenColumn2" width="auto" minScreenWidth="Tablet" demandPopin="true">
+						<Text id="_IDcolHeader2" text="Employee Name*" />
+					</Column>
+					<Column vAlign="Middle" id="_IDGenColumn3" width="auto" minScreenWidth="Tablet" demandPopin="true">
+						<Text id="_IDcolHeader3" text="Phone Number" />
+					</Column>
+					<Column vAlign="Middle" id="_IDGenColumn4" width="auto" minScreenWidth="Tablet" demandPopin="true">
+					</Column>
+				</columns>
+			</Table>
+		</content>
+		<endButton>
+			<Button id="empClosebtn" text="Cancel" type="Transparent" press="handler.closeEmpFragment" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
