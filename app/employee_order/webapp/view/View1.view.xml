@@ -3,11 +3,26 @@
         <pages>
             <Page title="Employee Details">
                 <content>
-                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true" itemClose="itemCloseHandler" addNewButtonPress="addNewButtonPressHandler" >
+                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true" itemClose="itemCloseHandler" addNewButtonPress="addNewButtonPressHandler"  tooltip="Add Employee Details">
                         <items>
                             <TabContainerItem id="infoTab"  itemPropertyChanged="onTabItemPressd" name="{name}" additionalText="{employeeId}"  >
                                 <content>
-                                    <Table id="ordersTable" items="{ path: '/'}">
+                                    <Toolbar>
+                                    <Title text="Orders({=${orders}.length})" textAlign="Begin"></Title>
+                                        <ToolbarSpacer />
+                                        <SearchField
+                                            id="searchField"
+                                            width="10%"
+                                            search="onSearch"
+                                            placeholder="Search"
+                                        />
+                                        <Button
+                                            icon="sap-icon://add"
+                                            press="onAdd"
+                                            tooltip="Add order items"
+                                        />
+                                    </Toolbar>
+                                    <Table id="ordersTable" items="{ path: 'orders'}">
                                         <columns>
                                             <Column>
                                                 <Text text="Order ID"/>
@@ -38,27 +53,3 @@
         </pages>
     </App>
 </mvc:View>
-
-
-
-<!-- <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.employeeorder.controller.View1">
-    <App>
-        <pages>
-            <Page title="Employee Details">
-                <content>
-                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true">
-                        <items>
-                            <TabContainerItem id="infoTab" itemPropertyChanged="pressfunction"
-                            name="{name}" 
-                            additionalText="{employeeId}"
-                            	>
-                               
-                            </TabContainerItem>
-                            
-                        </items>
-                    </TabContainer>
-                </content>
-            </Page>
-        </pages>
-    </App>
-</mvc:View> -->

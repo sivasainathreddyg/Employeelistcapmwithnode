@@ -12,11 +12,14 @@ function (Controller, JSONModel, Card,TabContainerItem) {
         onInit: function () {
             that = this;
            this.getEmployeeData();
+        //    if (!that._oDialog) {
+        //     that._oDialog = sap.ui.xmlfragment("com.employeeorder.Fragments.Employeedetails", that);
+        // }
         },
 
         getEmployeeData: function () {  
             var oModel = this.getOwnerComponent().getModel();
-            oModel.read("/Employees", {
+            oModel.read("/Employees?$expand=orders", {
                 success: function (oData) {
                     // Set the data to the model
                     //that.getView().getModel().setData(oData);
@@ -86,5 +89,11 @@ function (Controller, JSONModel, Card,TabContainerItem) {
                 newEmployee
             );
         },
+        addNewButtonPressHandler: function() {
+            
+            that._oDialog.open();
+        }
+        
+        
     });
 });

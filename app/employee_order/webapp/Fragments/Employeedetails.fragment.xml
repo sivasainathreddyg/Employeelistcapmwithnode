@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog
+        id="employeeDetailDialog"
+        title="Employee Details"
+        contentWidth="300px"
+        contentHeight="200px"
+        beginButton="{cancelButton}"
+        endButton="{closeButton}"
+        afterClose="onDialogClose">
+        <content>
+            <Form>
+                <Label text="Employee ID" />
+                <Input value="{employeeId}" />
+
+                <Label text="Name" />
+                <Input value="{name}" />
+
+                <Label text="City" />
+                <Input value="{city}" />
+            </Form>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>
