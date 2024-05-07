@@ -1,0 +1,21 @@
+POST http://localhost:4004/v2/catalog/Employeeorders
+Content-Type: application/json
+Authorization: Basic <base64-encoded-credentials>
+
+{
+  "employeeId": 3,
+  "name": "bob",
+  "city": "Kurnool",
+  "orders": [
+    {
+      "orderId": 105,
+      "orderName": "Product E",
+      "orderPrice": 60.00
+    },
+    {
+      "orderId": 105,
+      "orderName": "Product F",
+      "orderPrice": 80.25
+    }
+  ]
+}

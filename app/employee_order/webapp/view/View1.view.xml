@@ -1,0 +1,64 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.employeeorder.controller.View1">
+    <App>
+        <pages>
+            <Page title="Employee Details">
+                <content>
+                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true" itemClose="itemCloseHandler" addNewButtonPress="addNewButtonPressHandler" >
+                        <items>
+                            <TabContainerItem id="infoTab"  itemPropertyChanged="onTabItemPressd" name="{name}" additionalText="{employeeId}"  >
+                                <content>
+                                    <Table id="ordersTable" items="{ path: '/'}">
+                                        <columns>
+                                            <Column>
+                                                <Text text="Order ID"/>
+                                            </Column>
+                                            <Column>
+                                                <Text text="Order Name"/>
+                                            </Column>
+                                            <Column>
+                                                <Text text="Price"/>
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <ObjectIdentifier title="{orderId}"/>
+                                                    <Text text="{orderName}"/>
+                                                    <Text text="{orderPrice}"/>
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </content>
+                            </TabContainerItem>
+                        </items>
+                    </TabContainer>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>
+
+
+
+<!-- <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.employeeorder.controller.View1">
+    <App>
+        <pages>
+            <Page title="Employee Details">
+                <content>
+                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true">
+                        <items>
+                            <TabContainerItem id="infoTab" itemPropertyChanged="pressfunction"
+                            name="{name}" 
+                            additionalText="{employeeId}"
+                            	>
+                               
+                            </TabContainerItem>
+                            
+                        </items>
+                    </TabContainer>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View> -->

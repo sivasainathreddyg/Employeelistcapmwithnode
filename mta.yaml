@@ -50,6 +50,18 @@ modules:
       - comsbpemplistfiori.zip
       name: comsbpemplistfiori
       target-path: resources/
+    - artifacts:
+      - newlistreport.zip
+      name: newlistreport
+      target-path: resources/
+    - artifacts:
+      - newworklistreport.zip
+      name: newworklistreport
+      target-path: resources/
+    - artifacts:
+      - comemployeeorder.zip
+      name: comemployeeorder
+      target-path: resources/
 - name: comsbpemployeelist
   type: html5
   path: app/employeelist
@@ -73,6 +85,36 @@ modules:
 - name: comsbpemplistfiori
   type: html5
   path: app/Analytics/emp_list_fiori
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: newlistreport
+  type: html5
+  path: app/newlistreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: newworklistreport
+  type: html5
+  path: app/newworklistreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comemployeeorder
+  type: html5
+  path: app/employee_order
   build-parameters:
     build-result: dist
     builder: custom
