@@ -30,23 +30,6 @@ function (Controller, JSONModel, Card,TabContainerItem) {
                 }
             });
         },  
-        //     oModel.read("/Employees?$expand=orders", {
-        //         success: function (oData) {
-        //             // Set the data to the model
-        //             //that.getView().getModel().setData(oData);
-        //             var jsonModel = new sap.ui.model.json.JSONModel(oData.results);
-        //             that.getView().byId("tabContainer").setModel(jsonModel);
-        //         },
-        //         error: function (error) {
-        //             // Handle error
-        //             console.error("Error fetching employee data:", error);
-        //         }
-        //     });
-        // },
-        
-        pressfunction:function(){
-            
-        },
         onTabItemPress: function(oEvent) {
             var oTabContainerItem = oEvent.getSource();
             var sEmployeeId = oTabContainerItem.getAdditionalText();           
@@ -85,21 +68,6 @@ function (Controller, JSONModel, Card,TabContainerItem) {
                 }
             });
         },
-        // addNewButtonPressHandler : function() {
-        //     var newEmployee = new TabContainerItem({
-        //         name: "New employee",
-        //         employeeId:"New EmployeeID"
-        //     });
-
-        //     var tabContainer = this.byId("tabContainer");
-
-        //     tabContainer.addItem(
-        //         newEmployee
-        //     );
-        //     tabContainer.setSelectedItem(
-        //         newEmployee
-        //     );
-        // },
         addNewButtonPressHandler: function() {
             if (!that._oDialog) {
                 that._oDialog = sap.ui.xmlfragment("com.employeeorder.Fragments.Employeedetails", that);
@@ -155,32 +123,50 @@ function (Controller, JSONModel, Card,TabContainerItem) {
                 }
             })
 
-        }
-        // onsubmitorderdetails: function() {
-        //     var orderId = sap.ui.getCore().byId('orderId').getValue();
-        //     var employeeId = sap.ui.getCore().byId('empid').getValue(); // This should be the ID of the associated employee
-        //     var orderName = sap.ui.getCore().byId('orderName').getValue();
-        //     var orderPrice = sap.ui.getCore().byId('orderPrice').getValue();
-        //     var obj = {
-        //         orderId: orderId,
-        //         employeeId: employeeId,
-        //         orderName: orderName,
-        //         orderPrice: orderPrice
-        //     };
+        },
+        onSearch: function(oEvent) {
+            // Get the search value entered by the user
+            var sSearchValue = parseInt(oEvent.getSource().getValue());
         
-        //     var that = this; // Store the reference to 'this' for later use
-            
-        //     var oModel = this.getOwnerComponent().getModel();
-        //     oModel.create("/Orders", obj, {
-        //         success: function(odata) {
-        //             that.onCloseO(); // Assuming 'onCloseO' closes the dialog or performs some cleanup
-        //             sap.m.MessageToast.show("Data successfully Added"); // Use 'show' method to display the message toast
-        //         },
-        //         error: function(err) {
-        //             console.error(err);
-        //         }
-        //     });
-        // }
+            // If the search value is empty, reset the table to show all orders
+            if (!sSearchValue) {
+                this.fetchAllOrders();
+                return;
+            }
+        
+            // Filter the orders based on the search value
+            this.filterOrdersByOrderId(sSearchValue);
+        },
+        
+        fetchAllOrders: function() {
+            // Fetch all orders and display them in the table
+            var oModel = this.getView().getModel();
+            var sPath = "/Orders";
+            oModel.read(sPath, {
+                success: function(oData) {
+                    var oTableModel = new sap.ui.model.json.JSONModel(oData.results);
+                    this.byId("ordersTable").setModel(oTableModel);
+                }.bind(this),
+                error: function(error) {
+                    console.error("Error fetching orders:", error);
+                }
+            });
+        },
+        
+        filterOrdersByOrderId: function(sOrderId) {
+            // Filter orders by order ID
+            var oModel = this.getView().getModel();
+            var sPath = "/Orders(sOrderId3)";
+            oModel.read(sPath, {
+                success: function(oData) {
+                    var oTableModel = new sap.ui.model.json.JSONModel(oData.results);
+                    this.byId("ordersTable").setModel(oTableModel);
+                }.bind(this),
+                error: function(error) {
+                    console.error("Error filtering orders by order ID:", error);
+                }
+            });
+        }
         
         
     });

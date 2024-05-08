@@ -13,8 +13,8 @@
                                         <SearchField
                                             id="searchField"
                                             width="10%"
-                                            search="onSearch"
                                             placeholder="Search"
+                                            liveChange="onSearch"
                                         />
                                         <Button
                                             icon="sap-icon://add"
