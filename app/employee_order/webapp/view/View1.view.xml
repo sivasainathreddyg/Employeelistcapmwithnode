@@ -8,7 +8,7 @@
                             <TabContainerItem id="infoTab"  itemPropertyChanged="onTabItemPressd" name="{name}" additionalText="{employeeId}"  >
                                 <content>
                                     <Toolbar>
-                                    <Title text="Orders({=${orders}.length})" textAlign="Begin"></Title>
+                                    <Title text="Orders({=${orders/results}.length})" textAlign="Begin"></Title>
                                         <ToolbarSpacer />
                                         <SearchField
                                             id="searchField"
@@ -18,11 +18,11 @@
                                         />
                                         <Button
                                             icon="sap-icon://add"
-                                            press="onAdd"
+                                            press="onAddorderdetails"
                                             tooltip="Add order items"
                                         />
                                     </Toolbar>
-                                    <Table id="ordersTable" items="{ path: 'orders'}">
+                                    <Table id="ordersTable" items="{ path: 'orders/results'}">
                                         <columns>
                                             <Column>
                                                 <Text text="Order ID"/>
@@ -33,6 +33,9 @@
                                             <Column>
                                                 <Text text="Price"/>
                                             </Column>
+                                            <Column >
+                                            <Text text="CreatedDate"></Text>
+                                            </Column>
                                         </columns>
                                         <items>
                                             <ColumnListItem>
@@ -40,6 +43,7 @@
                                                     <ObjectIdentifier title="{orderId}"/>
                                                     <Text text="{orderName}"/>
                                                     <Text text="{orderPrice}"/>
+                                                    <Text text="{createdDate}"></Text>
                                                 </cells>
                                             </ColumnListItem>
                                         </items>

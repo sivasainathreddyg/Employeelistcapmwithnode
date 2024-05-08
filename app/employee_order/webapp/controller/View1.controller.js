@@ -11,27 +11,38 @@ function (Controller, JSONModel, Card,TabContainerItem) {
     return Controller.extend("com.employeeorder.controller.View1", {
         onInit: function () {
             that = this;
-           this.getEmployeeData();
-        //    if (!that._oDialog) {
-        //     that._oDialog = sap.ui.xmlfragment("com.employeeorder.Fragments.Employeedetails", that);
-        // }
+           that.getEmployeeData();
         },
 
         getEmployeeData: function () {  
             var oModel = this.getOwnerComponent().getModel();
-            oModel.read("/Employees?$expand=orders", {
-                success: function (oData) {
-                    // Set the data to the model
-                    //that.getView().getModel().setData(oData);
-                    var jsonModel = new sap.ui.model.json.JSONModel(oData.results);
+            oModel.read("/Employees", {
+                urlParameters: {
+                    $expand: "orders"
+                },
+                success: function(data) {
+                    console.log("Employees with order data:", data);
+                    var jsonModel=new sap.ui.model.json.JSONModel(data.results);
                     that.getView().byId("tabContainer").setModel(jsonModel);
                 },
-                error: function (error) {
-                    // Handle error
-                    console.error("Error fetching employee data:", error);
+                error: function(err) {
+                    console.error("Error reading Employees with Orders:", err);
                 }
             });
-        },
+        },  
+        //     oModel.read("/Employees?$expand=orders", {
+        //         success: function (oData) {
+        //             // Set the data to the model
+        //             //that.getView().getModel().setData(oData);
+        //             var jsonModel = new sap.ui.model.json.JSONModel(oData.results);
+        //             that.getView().byId("tabContainer").setModel(jsonModel);
+        //         },
+        //         error: function (error) {
+        //             // Handle error
+        //             console.error("Error fetching employee data:", error);
+        //         }
+        //     });
+        // },
         
         pressfunction:function(){
             
@@ -74,25 +85,102 @@ function (Controller, JSONModel, Card,TabContainerItem) {
                 }
             });
         },
-        addNewButtonPressHandler : function() {
-            var newEmployee = new TabContainerItem({
-                name: "New employee",
-                employeeId:"New EmployeeID"
-            });
+        // addNewButtonPressHandler : function() {
+        //     var newEmployee = new TabContainerItem({
+        //         name: "New employee",
+        //         employeeId:"New EmployeeID"
+        //     });
 
-            var tabContainer = this.byId("tabContainer");
+        //     var tabContainer = this.byId("tabContainer");
 
-            tabContainer.addItem(
-                newEmployee
-            );
-            tabContainer.setSelectedItem(
-                newEmployee
-            );
-        },
+        //     tabContainer.addItem(
+        //         newEmployee
+        //     );
+        //     tabContainer.setSelectedItem(
+        //         newEmployee
+        //     );
+        // },
         addNewButtonPressHandler: function() {
-            
+            if (!that._oDialog) {
+                that._oDialog = sap.ui.xmlfragment("com.employeeorder.Fragments.Employeedetails", that);
+            }
             that._oDialog.open();
+        },
+        oncloseE:function(){
+            this.oView=sap.ui.xmlfragment("com.employeeorder.Fragments.Employeedetails",that)
+            that._oDialog.close();
+        },
+        onsubmitemployeedetails:function(){
+            var obj={}
+            obj.employeeId=sap.ui.getCore().byId('empid').getValue();
+            obj.name=sap.ui.getCore().byId('empname').getValue();
+            obj.city=sap.ui.getCore().byId('empcity').getValue();
+            var oModel=this.getOwnerComponent().getModel();
+            oModel.create("/Employees",obj,{
+                success:function(odata){
+                    that.oncloseE();
+                    sap.m.MessageToast("Data sucessfully Added");
+                    //that.getEmployeeData();
+                }.bind(this),
+                error:function(err){
+                    console.log(err)
+                }
+            })
+        },
+        onAddorderdetails: function() {
+            if (!that._oDialog) {
+                that._oDialog = sap.ui.xmlfragment("com.employeeorder.Fragments.Orderitems", that);
+            }
+            that._oDialog.open();
+        },
+        onCloseO:function(){
+            this.oView=sap.ui.xmlfragment("com.employeeorder.Fragments.Orderitems",that)
+            that._oDialog.close();
+        },
+        onsubmitorderdetails:function(){
+            var obj={}
+            obj.orderId=sap.ui.getCore().byId('orderId').getValue();
+            obj.employeeId_employeeId=sap.ui.getCore().byId('empid').getValue();
+            obj.orderName=sap.ui.getCore().byId('orderName').getValue();
+            obj.orderPrice=sap.ui.getCore().byId('orderPrice').getValue();
+            var oModel=this.getOwnerComponent().getModel();
+            oModel.create("/Orders",obj,{
+                success:function(odata){
+                   that.oncloseO();
+                   sap.m.MessageToast("Data sucessfully Added");
+                   //that.getEmployeeData();
+               }.bind(this),
+               error:function(err){
+                   console.log(err);
+                }
+            })
+
         }
+        // onsubmitorderdetails: function() {
+        //     var orderId = sap.ui.getCore().byId('orderId').getValue();
+        //     var employeeId = sap.ui.getCore().byId('empid').getValue(); // This should be the ID of the associated employee
+        //     var orderName = sap.ui.getCore().byId('orderName').getValue();
+        //     var orderPrice = sap.ui.getCore().byId('orderPrice').getValue();
+        //     var obj = {
+        //         orderId: orderId,
+        //         employeeId: employeeId,
+        //         orderName: orderName,
+        //         orderPrice: orderPrice
+        //     };
+        
+        //     var that = this; // Store the reference to 'this' for later use
+            
+        //     var oModel = this.getOwnerComponent().getModel();
+        //     oModel.create("/Orders", obj, {
+        //         success: function(odata) {
+        //             that.onCloseO(); // Assuming 'onCloseO' closes the dialog or performs some cleanup
+        //             sap.m.MessageToast.show("Data successfully Added"); // Use 'show' method to display the message toast
+        //         },
+        //         error: function(err) {
+        //             console.error(err);
+        //         }
+        //     });
+        // }
         
         
     });

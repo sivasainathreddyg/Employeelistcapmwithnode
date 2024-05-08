@@ -1,23 +1,27 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
     <Dialog
         id="employeeDetailDialog"
         title="Employee Details"
-        contentWidth="300px"
-        contentHeight="200px"
-        beginButton="{cancelButton}"
-        endButton="{closeButton}"
-        afterClose="onDialogClose">
+        endButton="{closeButton}">
         <content>
-            <Form>
-                <Label text="Employee ID" />
-                <Input value="{employeeId}" />
+            <form:SimpleForm id="EmployeeDetail">
+                <form:content>
+                    <Label text="Employee ID"  />
+                    <Input value="{employeeId}" id="empid" />
 
-                <Label text="Name" />
-                <Input value="{name}" />
+                    <Label text="Name" />
+                    <Input value="{name}" id="empname" />
 
-                <Label text="City" />
-                <Input value="{city}" />
-            </Form>
+                    <Label text="City"  />
+                    <Input value="{city}" id="empcity"/>
+                </form:content>
+            </form:SimpleForm>
         </content>
+        <buttons>
+            
+                <Button text="Close" type="Reject" press="oncloseE"/>
+                <Button text="Submit" type="Accept" press="onsubmitemployeedetails" />
+           
+        </buttons>
     </Dialog>
 </core:FragmentDefinition>

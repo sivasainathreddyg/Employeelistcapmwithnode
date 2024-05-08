@@ -30,6 +30,7 @@ entity Order {
       employeeId : Association to Employee; // Foreign key linking to Employee entity
       orderName  : String;
       orderPrice : Decimal(10, 2);
+      createdDate:Date;
       
 }
 
