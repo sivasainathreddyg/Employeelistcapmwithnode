@@ -3,19 +3,25 @@
         <pages>
             <Page title="Employee Details">
                 <content>
-                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true" itemClose="itemCloseHandler" addNewButtonPress="addNewButtonPressHandler"  tooltip="Add Employee Details">
+                    <TabContainer id="tabContainer" items="{path:'/'}" showAddNewButton="true" itemClose="itemCloseHandler" addNewButtonPress="addNewButtonPressHandler" tooltip="Add Employee Details">
                         <items>
-                            <TabContainerItem id="infoTab"  itemPropertyChanged="onTabItemPressd" name="{name}" additionalText="{employeeId}"  >
+                            <TabContainerItem id="infoTab" itemPropertyChanged="onTabItemPressd" name="{name}" additionalText="{employeeId}">
                                 <content>
                                     <Toolbar>
-                                    <Title text="Orders({=${orders/results}.length})" textAlign="Begin"></Title>
+                                        <Title text="Orders({=${orders/results}.length})" textAlign="Begin"/>
                                         <ToolbarSpacer />
                                         <SearchField
                                             id="searchField"
                                             width="10%"
-                                            placeholder="Search"
-                                            liveChange="onSearch"
-                                        />
+                                            placeholder="OrderId"
+                                            liveChange="onSearch"/>
+                                        <DatePicker id="fromDate" placeholder="From Date" width="140px"  change="onDateChange"/>
+                                        <!-- DatePicker for To Date -->
+                                        <DatePicker id="toDate" placeholder="To Date" width="140px" change="onDateChange"/>
+
+                                        <!-- Button to trigger search -->
+                                        <Button text="Search" press="onSearchdate"/>
+                                        
                                         <Button
                                             icon="sap-icon://add"
                                             press="onAddorderdetails"
@@ -33,8 +39,8 @@
                                             <Column>
                                                 <Text text="Price"/>
                                             </Column>
-                                            <Column >
-                                            <Text text="CreatedDate"></Text>
+                                            <Column>
+                                                <Text text="CreatedDate"/>
                                             </Column>
                                         </columns>
                                         <items>
@@ -43,7 +49,7 @@
                                                     <ObjectIdentifier title="{orderId}"/>
                                                     <Text text="{orderName}"/>
                                                     <Text text="{orderPrice}"/>
-                                                    <Text text="{createdDate}"></Text>
+                                                    <Text text="{ path: 'createdDate', formatter: '.formatter.formatDate' }" />
                                                 </cells>
                                             </ColumnListItem>
                                         </items>

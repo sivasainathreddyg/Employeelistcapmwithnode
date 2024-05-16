@@ -17,6 +17,8 @@
                      <Label text="orderPrice"  />
                     <Input value="{orderPrice}" id="orderPrice"/>
 
+                    <Label text="Created Date"></Label>
+                    <Input value="{createdDate}" id="createdDate"></Input>
                 </form:content>
             </form:SimpleForm>
         </content>
