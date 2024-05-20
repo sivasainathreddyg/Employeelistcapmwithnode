@@ -23,10 +23,8 @@
             </form:SimpleForm>
         </content>
         <buttons>
-            
-                <Button text="Close" type="Reject" press="onCloseO"/>
                 <Button text="Submit" type="Accept" press="onsubmitorderdetails" />
-           
-        </buttons>
+                <Button text="Close" type="Reject" press="onCloseO"/>
+         </buttons>
     </Dialog>
 </core:FragmentDefinition>

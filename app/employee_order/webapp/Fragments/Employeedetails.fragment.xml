@@ -17,11 +17,9 @@
                 </form:content>
             </form:SimpleForm>
         </content>
-        <buttons>
-            
-                <Button text="Close" type="Reject" press="oncloseE"/>
+        <buttons>            
                 <Button text="Submit" type="Accept" press="onsubmitemployeedetails" />
-           
+                <Button text="Close" type="Reject" press="oncloseE"/>           
         </buttons>
     </Dialog>
 </core:FragmentDefinition>
